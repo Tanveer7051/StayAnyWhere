@@ -1,0 +1,257 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<style>
+  /* ----- Global Styles ----- */
+  body {
+    /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+    font-family: 'Inter', sans-serif;
+    /* color: #333; */
+  }
+
+  .container {
+    margin-top: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    color: #f55c73;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* ----- Listing Card Styles ----- */
+  .listing-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .listing-card img {
+    height: 260px;
+    object-fit: cover;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+  }
+
+  .listing-card:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin-bottom: 0.75rem;
+  }
+
+  .price-text {
+    font-weight: 600;
+    color: #FF385C;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+    padding: 0.5em 0.8em;
+    /* background: rgba(0, 0, 0, 0.75); */
+    border-radius: 6px;
+    color: #fff;
+  }
+
+  .rating-badge {
+    font-size: 0.75rem;
+    background: #FFD700;
+    color: #1a1a1a;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+  }
+
+  .toggle_gst {
+    color: #888;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .toggle_gst:hover {
+    color: #FF385C;
+  }
+
+  .book-now-btn {
+    background-color: #FF385C;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .book-now-btn:hover {
+    background-color: #e0314b;
+  }
+
+  /* ----- Animations ----- */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ----- Responsive Design ----- */
+  @media (max-width: 992px) {
+    .listing-card img {
+      height: 220px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .listing-card {
+      max-width: 100%;
+    }
+
+    .listing-card img {
+      height: 200px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+    }
+
+    .badge,
+    .rating-badge {
+      font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      margin-top: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .listing-card img {
+      height: 180px;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .book-now-btn {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  /* ----- Accessibility ----- */
+  a:focus .listing-card {
+    outline: 3px solid #FF385C;
+    outline-offset: 2px;
+  }
+
+  .book-now-btn:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+</style>
+
+<body>
+  <div class="container my-5">
+    <h2 class="text-center section-title fw-bold available-room">Available Rooms</h2>
+
+    <div class="row g-4 justify-content-center">
+      <% for (let listing of allListing) { %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+          <a
+            href="/listings/<%= listing._id %>"
+            class="text-decoration-none text-dark w-100"
+            style="max-width: 24rem;"
+            aria-label="View details for <%= listing.title %>"
+          >
+            <div class="card listing-card shadow-sm border-0">
+              <div class="position-relative">
+                <img
+                  src="<%= listing.image.url %>"
+                  class="card-img-top"
+                  alt="<%= listing.title %> Image"
+                >
+                <div class="card-img-overlay d-flex justify-content-between align-items-start p-2">
+                  <span class="badge"><%= listing.title %></span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title fw-semibold"><%= listing.title %></h5>
+                <p class="card-text price-text mb-1">
+                  <b>&#8377;</b><%= listing.price.toLocaleString("en-IN") %> / Night
+                </p>
+                <p class="toggle_gst hidden" >+18% GST</p>
+                <% if(currUser){ %>
+                <button class="book-now-btn w-100">Book Now</button>
+                <% } %>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <script>
+    // Toggle GST visibility
+    document.querySelectorAll('.toggle_gst').forEach(gst => {
+      gst.addEventListener('click', () => {
+        gst.classList.toggle('hidden');
+        if (gst.classList.contains('hidden')) {
+          gst.textContent = '+18% GST';
+        } else {
+          gst.textContent = 'Hide GST';
+        }
+      });
+    });
+  </script>
+</body>

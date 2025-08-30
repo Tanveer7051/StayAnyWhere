@@ -1,0 +1,64 @@
+<% layout("layouts/boilerplate2.ejs") %>
+
+<main>
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqHeadingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+              How do I create an account?
+            </button>
+          </h2>
+          <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Click on the “Sign Up” button on the top-right, fill in your details and submit. You will receive a confirmation email shortly.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqHeadingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+              Is my payment information secure?
+            </button>
+          </h2>
+          <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, we use SSL encryption and trusted payment gateways to ensure your data is always protected.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqHeadingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+              How can I contact support?
+            </button>
+          </h2>
+          <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can contact support through our “Contact Support” page or email us directly at support@stayanytime.com.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faqHeadingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+              Can I update my profile information later?
+            </button>
+          </h2>
+          <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, you can update your profile information anytime from the “My Account” section after logging in.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,121 @@
+<style>
+  .filter{
+    margin-top: 5rem;
+  }
+</style>
+<body>
+  <div class="filter">
+    <div class="toggle ">
+      <div class="form-check  form-switch  form-check-reverse ">
+        <input class="form-check-input form-check-search switch font-container" type="checkbox" role="switch"
+          id="switchCheckDefault">
+        <label class="form-check-label GST " for="switchCheckDefault">Display After GST</label>
+      </div>
+    </div>
+    <div class="nav-link  nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/trending"><i class="fa-solid font-container fa-fire-flame-curved"></i><p class="name">Trending</p></a>
+      </div>
+      
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/cities"><i class="fa-solid font-container fa-city"></i> <p class="name">Cities</p></a>
+        
+      </div>
+     
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/mountainside"><i class="fa-solid font-container fa-mountain-city"></i><p class="name">Mountain Side</p></a>
+      </div>
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/castles"><i class="fa-brands font-container fa-fort-awesome"></i><p class="name">Castles</p></a>
+      </div>
+    </div>
+
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/amazingpools"><i class="fa-solid font-container fa-person-swimming"></i><p class="name">Amazing Pools</p></a>
+      </div>
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/mostvisited"><i class="fa-brands font-container fa-fort-awesome"></i><p class="name">Most Visited</p></a>
+      </div>
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/campaign"><i class="fa-solid font-container fa-campground"></i><p class="name">Campaign</p></a>
+        
+      </div>
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/inwater"><i class="fa-solid font-container fa-house-flood-water"></i><p class="name">In Water</p></a>
+      </div>
+    </div>
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/arctic"><i class="fa-brands font-container fa-galactic-republic"></i><p class="name">Arctic</p></a>
+      </div>
+    </div>
+    <!-- <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <i class="fa-solid font-container fa-shop-lock"></i>
+      </div>
+      <p class="name">Security Tight</p>
+    </div> -->
+    <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <a href="/listings/explore/domes"><i class="fa-solid font-container fa-landmark-dome"></i><p class="name">Domes</p></a>
+      </div>
+    </div>
+    <!-- <div class="nav-link nav-link-trending">
+      <div class="icon-container">
+        <i class="fa-solid font-container fa-tent"></i>
+      </div>
+      <p class="name">Tent</p>
+    </div> -->
+  </div>
+  <script>
+  //   (() => {
+  // 'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      // Prevent submission if the form is invalid
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+    }, false);
+  });
+// }
+)();
+
+// Toggle the visibility of GST-related fields
+const toggleButton = document.getElementById("switchCheckDefault");
+if (toggleButton) {
+  toggleButton.addEventListener("click", () => {
+    console.log("GST toggle clicked");
+
+    // Find all elements with the class 'toggle_gst'
+    const gstFields = document.getElementsByClassName("toggle_gst");
+
+    // Loop over each field and toggle visibility
+    Array.from(gstFields).forEach(gstField => {
+      gstField.classList.toggle("hidden");
+    });
+  });
+}
+
+  </script>

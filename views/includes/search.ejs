@@ -1,0 +1,44 @@
+<!-- Styles -->
+<style>
+  .search-form-container {
+    max-width: 500px;
+    margin:2rem auto 1rem auto;
+
+  }
+
+  .search-bar {
+    flex: 1;
+    border-radius: 2rem;
+  }
+
+  .search-btn {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 576px) {
+    .search-form-container {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .search-btn {
+      width: 100%;
+    }
+  }
+</style>
+
+
+<!--  Search Form -->
+<form action="/listings/search" method="POST" class="d-flex search search-form-container" role="search">
+  <input
+    class="form-control me-2 search-bar"
+    name="search"
+    type="search"
+    placeholder="Search by country"
+    aria-label="Search"
+    required
+  >
+  <button class="btn btn-outline-danger search-btn" type="submit">
+    <i class="fa-solid fa-magnifying-glass me-1"></i> Search
+  </button>
+</form>

@@ -1,0 +1,226 @@
+
+<style>
+  :root {
+    --primary-color: #FF385C;
+    --primary-dark: #e0314b;
+    --text-dark: #1a1a1a;
+    --text-muted: #4a4a4a;
+    /* --bg-light:; */
+  }
+  /* ----- Navbar Styles ----- */
+  .navbar {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 0.8rem 1rem;
+    transition: all 0.3s ease;
+  }
+  /* .fa-magnifying-glass{
+    color:white
+  }
+  .fa-magnifying-glass:hover{
+    color:black
+  } */
+
+  .navbar.scrolled {
+    background-color: white;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .navbar-brand {
+    font-size: 1.6rem;
+    color: #FF385C;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .navbar-brand:hover {
+    color: var(--primary-dark);
+    transform: scale(1.05);
+  }
+
+  .navbar-brand i {
+    font-size: 1.4rem;
+    margin-right: 0.4rem;
+  }
+
+  /* ----- Nav Links ----- */
+  .nav-link.btn,
+  .btn.features {
+    font-size: 0.95rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link.btn:hover,
+  .btn.features:hover {
+    background-color: var(--primary-color);
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 56, 92, 0.25);
+  }
+
+  /* ----- Search Bar ----- */
+  .search-form-container {
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    position: relative;
+  }
+
+  .search-bar {
+    flex: 1;
+    border-radius: 2rem;
+    border: 1.5px solid var(--primary-color);
+    padding: 0.55rem 1.2rem;
+    font-size: 0.95rem;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+
+  .search-bar:focus {
+    border-color: var(--primary-dark);
+    background-color: #f3eeee;
+    box-shadow: 0 0 12px rgba(255, 56, 92, 0.3);
+    outline: none;
+  }
+
+  .search-btn {
+    border-radius: 2rem;
+    border: none;
+    background: var(--primary-color);
+    color: #f3eeee;
+    padding: 0.55rem 1.4rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease;
+  }
+
+  .search-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 56, 92, 0.3);
+  }
+
+  .search-btn i {
+    font-size: 1rem;
+    color: #f3eeee;
+  }
+
+  /* ----- Responsive Design ----- */
+  @media (max-width: 992px) {
+    .search-form-container {
+      max-width: 100%;
+      margin: 1rem auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 0.6rem 1rem;
+    }
+
+    .search-form-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .search-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .navbar-brand {
+      font-size: 1.3rem;
+    }
+
+    .navbar-brand i {
+      font-size: 1.1rem;
+    }
+
+    .nav-link.btn,
+    .btn.features {
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+  .features{
+      margin: .2rem;
+    }
+</style>
+
+<nav class="navbar navbar-expand-md fixed-top">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/listings" aria-label="StayAnyTime Home">
+     StayAnyTime
+    </a>
+
+    <!-- Toggle button for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Left -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link btn me-2" href="/listings">
+            Explore
+          </a>
+        </li>
+      </ul>
+
+      <!-- Search Form -->
+      <form action="/listings/search" method="POST" class="search-form-container" role="search">
+        <input class="form-control search-bar" name="search" type="search" placeholder="Search by country" required>
+        <button class="btn search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+      </form>
+
+      <!-- Right -->
+      <ul class="navbar-nav ms-auto d-flex align-items-center mt-2 mt-lg-0">
+        <li class="nav-item me-2">
+          <a class="btn features" href="/listings/new">Become a Host</a>
+        </li>
+
+        <% if (!currUser) { %>
+          <li class="nav-item me-2">
+            <a class="btn features" href="/signUp">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn features" href="/login">Login</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="btn features" href="/logout">Log Out</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    navbar.classList.toggle("scrolled", window.scrollY > 20);
+  });
+</script>

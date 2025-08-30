@@ -1,0 +1,22 @@
+<% layout("layouts/boilerplate2.ejs") %>
+</head>
+<body>
+
+  <div class="feedback-container">
+    <h3 class="text-center">💬 Give Your Feedback</h3>
+    <form action="/feedback" method="POST">
+      <div class="mb-3">
+        <label for="name" class="form-label">Your Name</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Your Email</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Your Feedback</label>
+        <textarea name="message" id="message" rows="5" class="form-control" placeholder="Write your feedback..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-submit w-100">Send Feedback</button>
+    </form>
+  </div>

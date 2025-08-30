@@ -1,0 +1,282 @@
+<% layout("layouts/boilerplate.ejs") %>
+<style>
+/* Review Form */
+.starability-basic {
+  font-size: 1.4rem; /* Adjust star size */
+}
+
+textarea:focus {
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+  border-color: #86b7fe;
+}
+
+@media (max-width: 576px) {
+  .btneditdele {
+    width: 8rem;
+  }
+  textarea {
+    font-size: 1rem;
+  }
+
+}
+/*View Review */
+  .starability-result {
+  display: inline-block;
+  transform: scale(0.7); /* Shrinks the stars to 80% of original size */
+  transform-origin: left center; /* Keeps alignment to the left */
+  margin: 10px 0;
+}
+/* Container styling */
+.reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Review Card */
+.review-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .review-card {
+    width: calc(50% - 20px); /*  space for the gap */
+    display: block; 
+  }
+}
+/* Review text area */
+.review-text-wrapper {
+  position: relative;
+}
+
+/* Truncated review */
+.review-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Limit to 4 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* Expanded review */
+.review-text.expanded {
+  -webkit-line-clamp: unset;
+  max-height: none;
+}
+
+/* Toggle button */
+.toggle-btn {
+  display: inline-block;
+  margin-top: 2px;
+  color: #05080c;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+
+}
+
+/* Delete button */
+.delete-btn {
+  margin-top: 1rem;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 1rem;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #b02a37;
+}
+
+.title{
+  color: rgba(255, 56, 92, 0.8);
+}
+.review{
+  font-size: 19px;
+  opacity: .7;
+}
+</style>
+<body>
+  <div class="container my-5">
+    <h2 class="text-center mb-4"><li class="list-group-item title"><strong><%= listing.title %></strong></li></h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card  listing-card"> <!-- shadow-sm      it is class for making line boudary shadow aroud the content -->
+          <img 
+            src="<%= listing.image.url %>" 
+            class="card-img-top img-fluid" 
+            style="max-height: 35rem; object-fit: cover;" 
+            alt="Room Image"
+          >
+          <div class="card-body ">
+            <!-- <ul class="list-group list-group-flush mb-3"> -->
+              <p><strong>Owned By:</strong> <%= listing.owner.username %></p>
+              <p><strong>Description:</strong> <%= listing.description %></p>
+              <p><strong>Price:</strong> ₹ <%= listing.price.toLocaleString("en-IN") %>&nbsp; <i class="toggle_gst hidden"> &nbsp; +18% GST</i></p>
+              <p><strong>Location:</strong> <%= listing.location %></p>
+              <p><strong>Country:</strong> <%= listing.country %></p>
+              <!-- <p><strong>Country:</strong> <%= listing.viewPoint %></p> -->
+              <!-- <li class="list-group-item"><strong>Country:</strong> <%= listing.country %></li> -->
+            <!-- </ul> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- <div class="btn col-6 offset-3 mb-2">
+     <form action="/listings">
+              <button type="submit" class="btn btn-outline-success">Back to Home</button>
+   </form>
+  </div> -->
+  <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
+<div class="button">
+  <a type="btn " class="btn btneditdele btn-outline-success" href="/listings/<%= listing._id%>/edit">Edit</a>
+<form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+    <button class="btn btneditdele btn-outline-danger">Delete</button>
+</form>
+</div>
+<% } %>
+
+
+<!-- Review Form Submit -->
+<% if(currUser){ %>
+  <form action="/listings/<%= currUser._id %>/rent" method="GET">
+<div class=" row col-6 m-auto text-center mb-4">
+      <button type="submit" id="buy_btn" class="btn  px-4 py-2">Buy For One Night</button>
+    </div>
+  </form>
+  
+    
+  <div class="container my-5"></div>
+    <div class="card shadow-lg p-4">
+      <h3 class=" mb-4 fw-normal ">Posting Publicly</h3>
+      
+      <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+        <div class="mb-3">
+          <!-- <label for="rating" class="form-label fw-bold">Your Rating</label> -->
+          <fieldset class="starability-basic">
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
+
+        <div class="mb-3">
+          <!-- <label for="comment" class="form-label fw-bold">Your Comment</label> -->
+          <textarea name="review[comment]" id="comment" rows="5" class="form-control" placeholder="Tell others about your experience..." required></textarea>
+          <div class="invalid-feedback">Comment is required.</div>
+        </div>
+
+        <div class="text-center">
+          <button class="btn submit-review px-4 py-2">Submit Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+<% } %>
+
+<!-- View Existing Review -->
+ <% if (listing.reviews.length > 0) { %>
+ <div class="text-center">
+  <p class="fw-semibold d-inline-block text-center shadow p-3 rounded review mt-5">See Reviews</p>
+ </div>
+ <% } %>
+<% if (listing.reviews.length > 0) { %>
+  <div class="reviews-container">
+    <% for (let review of listing.reviews) { %>
+      <% if (review.comment && review.comment.length >= 1) { %>
+        <div class="review-card">
+          <div class="card-body">
+            <h5 class="card-title">@<%= review.author.username %></h5>
+            <div style="display: flex; align-items: center; gap: 0;">
+              <p class="starability-result card-text" style="margin: 2px;" data-rating="<%= review.rating %>"></p>
+              <i style="font-size: 0.9rem; color: rgb(16, 15, 15);">
+                <%= new Date(review.date).toLocaleString('en-IN', { dateStyle: 'medium'}) %>
+              </i>
+            </div>
+
+            <div class="review-text-wrapper">
+              <p class="review-text"><%= review.comment %></p>
+              <span class="toggle-btn">View More</span>
+            </div>
+          </div>
+
+          <% if (
+            currUser &&
+            (
+              review.author._id.toString() === currUser._id.toString() ||
+              listing.owner._id.toString() === currUser._id.toString()
+            )
+          ) { %>
+            <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+              <button class="delete-btn">Delete</button>
+            </form>
+          <% } %>
+        </div>
+      <% } %>
+    <% } %>
+  </div>
+<% } else { %>
+  <div class="text-center">
+  <p style="font-size: 19px;" 
+     class="fw-semibold d-inline-block text-center shadow p-3 rounded mt-5 mb-5">
+     ⭐ “Be the first to share your experience with this stay!”
+  </p>
+</div>
+
+<% } %>
+</body>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrappers = document.querySelectorAll(".review-text-wrapper");
+
+    wrappers.forEach(wrapper => {
+      const text = wrapper.querySelector(".review-text");
+      const toggle = wrapper.querySelector(".toggle-btn");
+
+      // Save the full height temporarily
+      const initialHeight = text.scrollHeight;
+
+      // Temporarily remove line clamp to measure full height
+      text.classList.add("expanded");
+      const fullHeight = text.scrollHeight;
+      text.classList.remove("expanded");
+
+      // If the full height is significantly more than the clamped height
+      if (fullHeight <= text.clientHeight + 5) {
+        toggle.style.display = "none"; // Don't show toggle
+      }
+
+      // Toggle the class on click
+      toggle.addEventListener("click", () => {
+        text.classList.toggle("expanded");
+        toggle.textContent = text.classList.contains("expanded") ? "View Less" : "View More";
+      });
+    });
+  });
+</script>

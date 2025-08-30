@@ -1,0 +1,28 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+ <div class="container my-4">
+  <div class="row g-4">
+    <% for (let listing of result) { %>
+      <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
+        <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark w-100" style="max-width: 20rem;">
+          <div class="card listing-card shadow-sm border-0">
+            <div class="position-relative">
+              <img src="<%= listing.image.url %>" class="card-img-top rounded-top" alt="Listing Image" style="height: 250px; object-fit: cover;">
+              <div class="card-img-overlay d-flex align-items-start p-2">
+                <span class="badge bg-dark bg-opacity-50 text-white"><%= listing.title %></span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-2"><%= listing.title %></h5>
+              <p class="card-text text-muted mb-0">
+                <b>&#8377;</b><%= listing.price.toLocaleString("en-IN") %>/Night
+                <i class="toggle_gst hidden"> &nbsp; +18% GST</i>
+              </p>
+
+            </div>
+          </div>
+        </a>
+      </div>
+    <% } %>
+  </div>
+</div>
