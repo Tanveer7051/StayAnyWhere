@@ -110,3 +110,43 @@
 
   </form>
 </div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+
+
+document.getElementById('url').addEventListener('change', function () {
+  const file = this.files[0];
+  if (file) {
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!validTypes.includes(file.type)) {
+      alert('Only JPEG, PNG, and WEBP images are allowed.');
+      this.value = ''; // Reset input
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image must be smaller than 2MB.');
+      this.value = '';
+    }
+  }
+});
+
+
+</script>
