@@ -109,7 +109,6 @@ textarea:focus {
   opacity: .7;
 }
 </style>
-<body>
   <div class="container my-5">
     <h2 class="text-center mb-4"><li class="list-group-item title"><strong><%= listing.title %></strong></li></h2>
 
@@ -248,7 +247,7 @@ textarea:focus {
 </div>
 
 <% } %>
-</body>
+
 
 <script>
 
@@ -279,4 +278,24 @@ textarea:focus {
       });
     });
   });
+
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
 </script>
