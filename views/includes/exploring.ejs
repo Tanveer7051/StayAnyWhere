@@ -2,6 +2,9 @@
   .filter{
     margin-top: 5rem;
   }
+  .hidden{
+  display: none;
+}
 </style>
 <body>
   <div class="filter">
@@ -81,27 +84,7 @@
     </div> -->
   </div>
   <script>
-  //   (() => {
-  // 'use strict';
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation');
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      // Prevent submission if the form is invalid
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      form.classList.add('was-validated');
-    }, false);
-  });
-// }
-)();
-
+  
 // Toggle the visibility of GST-related fields
 const toggleButton = document.getElementById("switchCheckDefault");
 if (toggleButton) {

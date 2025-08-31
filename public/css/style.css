@@ -204,9 +204,6 @@ a{
 .form-check-search{
   display: flex;
 }
-.hidden{
-  display: none;
-}
 /* REview */
 .submit-review{
   background-color: #1A73E8;
