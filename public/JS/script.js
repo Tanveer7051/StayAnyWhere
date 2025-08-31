@@ -19,14 +19,14 @@
 })()
 
 
-//for toggle gst btn
-let toggle=document.getElementById("switchCheckDefault");
-toggle.addEventListener("click",()=>{
-  console.log("clicked");
-  let gst=document.getElementsByClassName("toggle_gst");
-  for(info of gst){
-    // info.style.display="inline";
-    info.classList.toggle("hidden")
-  }
-  })
+// //for toggle gst btn
+// let toggle=document.getElementById("switchCheckDefault");
+// toggle.addEventListener("click",()=>{
+//   console.log("clicked");
+//   let gst=document.getElementsByClassName("toggle_gst");
+//   for(info of gst){
+//     // info.style.display="inline";
+//     info.classList.toggle("hidden")
+//   }
+//   })
 
