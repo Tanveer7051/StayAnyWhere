@@ -1,7 +1,3 @@
-Sure! Here's a full `README.md` tailored to your **StayAnyTime** project, ready to be used in your GitHub repository.
-
----
-
 # StayAnyTime
 
 StayAnyTime is a modern platform that helps users find, rent, and manage vacation properties. The platform allows users to search for properties, book them, leave reviews, and contact property owners. Built with **Node.js**, **Express**, **MongoDB**, and **EJS**, StayAnyTime offers a seamless experience for vacation planning.
@@ -219,4 +215,4 @@ That’s it! You now have a fully functional **StayAnyTime** app, ready for user
 
 ---
 
-This README should now cover everything related to the setup, deployment, and usage of your **StayAnyTime** application.
+This README should now cover everything related to the setup, deployment, and usage of  **StayAnyTime** application.
